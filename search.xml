@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[test]]></title>
+    <url>%2F2018%2F10%2F29%2Ftest-1%2F</url>
+    <content type="text"><![CDATA[Test标签和分类！！！]]></content>
+      <categories>
+        <category>Test2</category>
+      </categories>
+      <tags>
+        <tag>Test2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[test]]></title>
+    <url>%2F2018%2F10%2F29%2Ftest%2F</url>
+    <content type="text"><![CDATA[测试一下分类和标签的设置！！！]]></content>
+      <categories>
+        <category>Test</category>
+      </categories>
+      <tags>
+        <tag>Test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2018%2F10%2F29%2FHello%20World%2F</url>
+    <content type="text"><![CDATA[123456title: Hello World!date: 2018-10-29 16:11:00categories: - Testtags:- Test]]></content>
+  </entry>
+</search>
