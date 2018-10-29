@@ -232,12 +232,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/go addressable 详解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/Hello World/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/default_avatar.png">
+      <meta itemprop="image" content="/james.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/29/go addressable 详解/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2018/10/29/Hello World/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -303,100 +303,9 @@
       
         
           
-            <h1 id="go-addressable-详解"><a href="#go-addressable-详解" class="headerlink" title="go addressable 详解"></a>go addressable 详解</h1><blockquote>
-<p>原文地址：<a href="http://colobu.com/2018/02/27/go-addressable/" target="_blank" rel="noopener">http://colobu.com/2018/02/27/go-addressable/</a></p>
+            <blockquote>
+<p>title: Hello World!<br>type: “tags”</p>
 </blockquote>
-<p>Go语言规范中规定了可寻址(addressable)对象的定义,</p>
-<blockquote>
-<p>For an operand x of type T, the address operation &amp;x generates a pointer of type *T to x. The operand must be addressable, that is, either a variable, pointer indirection, or slice indexing operation; or a field selector of an addressable struct operand; or an array indexing operation of an addressable array. As an exception to the addressability requirement, x may also be a (possibly parenthesized) composite literal. If the evaluation of x would cause a run-time panic, then the evaluation of &amp;x does too.</p>
-</blockquote>
-<p>对于一个对象<code>x</code>, 如果它的类型为<code>T</code>, 那么<code>&amp;x</code>则会产生一个类型为<code>*T</code>的指针，这个指针指向<code>x</code>, 这是这一段的第一句话，也是我们在开发过程中经常使用的一种获取对象指针的一种方式。</p>
-<h2 id="addressable"><a href="#addressable" class="headerlink" title="addressable"></a>addressable</h2><p>上面规范中的这段话规定， <code>x</code>必须是可寻址的， 也就是说，它只能是以下几种方式：</p>
-<ul>
-<li>一个变量: <code>&amp;x</code></li>
-<li>指针引用(pointer indirection): <code>&amp;*x</code></li>
-<li>slice索引操作(不管slice是否可寻址): <code>&amp;s[1]</code></li>
-<li>可寻址struct的字段: <code>&amp;point.X</code></li>
-<li>可寻址数组的索引操作: <code>&amp;a[0]</code></li>
-<li><p>composite literal类型: <code>&amp;struct{ X int }{1}</code></p>
-<p>下列情况<code>x</code>是不可以寻址的，你不能使用<code>&amp;x</code>取得指针：</p>
-</li>
-<li><p>字符串中的字节:</p>
-</li>
-<li>map对象中的元素</li>
-<li>接口对象的动态值(通过type assertions获得)</li>
-<li>常数</li>
-<li>literal值(非composite literal)</li>
-<li>package 级别的函数</li>
-<li>方法method (用作函数值)</li>
-<li>中间值(intermediate value):<ul>
-<li>函数调用</li>
-<li>显式类型转换</li>
-<li>各种类型的操作 （除了指针引用pointer dereference操作 <code>*x</code>):<ul>
-<li>channel receive operations</li>
-<li>sub-string operations</li>
-<li>sub-slice operations</li>
-<li>加减乘除等运算符</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>Tapir Games在他的文章<a href="http://www.tapirgames.com/blog/golang-unofficial-faq#unaddressable-values" target="_blank" rel="noopener">unaddressable-values</a>中做了很好的整理。</p>
-</blockquote>
-<p>有几个点需要解释下：</p>
-<ul>
-<li>常数为什么不可以寻址?： 如果可以寻址的话，我们可以通过指针修改常数的值，破坏了常数的定义。</li>
-<li>map的元素为什么不可以寻址？:两个原因，如果对象不存在，则返回零值，零值是不可变对象，所以不能寻址，如果对象存在，因为Go中map实现中元素的地址是变化的，这意味着寻址的结果是无意义的。</li>
-<li>为什么slice不管是否可寻址，它的元素读是可以寻址的？:因为slice底层实现了一个数组，它是可以寻址的。</li>
-<li>为什么字符串中的字符/字节又不能寻址呢：因为字符串是不可变的。</li>
-</ul>
-<p>规范中还有几处提到了 <code>addressable</code>:</p>
-<ul>
-<li>调用一个receiver为指针类型的方法时，使用一个addressable的值将自动获取这个值的指针</li>
-<li><code>++</code>、<code>--</code>语句的操作对象必须是addressable或者是map的index操作</li>
-<li>赋值语句<code>=</code>的左边对象必须是addressable,或者是map的index操作，或者是<code>_</code></li>
-<li>上条同样使用<code>for ... range</code>语句</li>
-</ul>
-<h2 id="reflect-Value的CanAddr方法和CanSet方法"><a href="#reflect-Value的CanAddr方法和CanSet方法" class="headerlink" title="reflect.Value的CanAddr方法和CanSet方法"></a><code>reflect.Value</code>的<code>CanAddr</code>方法和<code>CanSet</code>方法</h2><p>在我们使用<code>reflect</code>执行一些底层的操作的时候， 比如编写序列化库、rpc框架开发、编解码、插件开发等业务的时候，经常会使用到<code>reflect.Value</code>的<code>CanSet</code>方法，用来动态的给对象赋值。 <code>CanSet</code>比<code>CanAddr</code>只加了一个限制，就是struct类型的<code>unexported</code>的字段不能<code>Set</code>，所以我们这节主要介绍<code>CanAddr</code>。</p>
-<p>并不是任意的<code>reflect.Value</code>的<code>CanAddr</code>方法都返回<code>true</code>,根据它的godoc,我们可以知道：</p>
-<blockquote>
-<p>CanAddr reports whether the value’s address can be obtained with Addr. Such values are called addressable. A value is addressable if it is an element of a slice, an element of an addressable array, a field of an addressable struct, or the result of dereferencing a pointer. If CanAddr returns false, calling Addr will panic.</p>
-</blockquote>
-<p>也就是只有下面的类型<code>reflect.Value</code>的<code>CanAddr</code>才是<code>true</code>, 这样的值是<code>addressable</code>:</p>
-<ul>
-<li>slice的元素</li>
-<li>可寻址数组的元素</li>
-<li>可寻址struct的字段</li>
-<li>指针引用的结果</li>
-</ul>
-<p>与规范中规定的<code>addressable</code>, <code>reflect.Value</code>的<code>addressable</code>范围有所缩小， 比如对于栈上分配的变量， 随着方法的生命周期的结束， 栈上的对象也就被回收掉了，这个时候如果获取它们的地址，就会出现不一致的结果，甚至安全问题。</p>
-<blockquote>
-<p>对于栈和堆的对象分配以及逃逸分析，你可以看 William Kennedy 写的系列文章: <a href="https://studygolang.com/articles/12444" target="_blank" rel="noopener">Go 语言机制之逃逸分析</a></p>
-</blockquote>
-<p>所以如果你想通过<code>reflect.Value</code>对它的值进行更新，应该确保它的<code>CanSet</code>方法返回<code>true</code>,这样才能调用<code>SetXXX</code>进行设置。</p>
-<p>使用<code>reflect.Value</code>的时候有时会对<code>func Indirect(v Value) Value</code>和<code>func (v Value) Elem() Value</code>两个方法有些迷惑，有时候他们俩会返回同样的值，有时候又不会。</p>
-<p>总结一下：</p>
-<ol>
-<li>如果<code>reflect.Value</code>是一个指针， 那么<code>v.Elem()</code>等价于<code>reflect.Indirect(v)</code></li>
-<li>如果不是指针<br> 2.1 如果是<code>interface</code>, 那么<code>reflect.Indirect(v)</code>返回同样的值，而<code>v.Elem()</code>返回接口的动态的值<br> 2.2 如果是其它值, <code>v.Elem()</code>会panic,而<code>reflect.Indirect(v)</code>返回原值</li>
-</ol>
-<p>下面的代码列出一些<code>reflect.Value</code>是否可以addressable, 你需要注意数组和struct字段的情况，也就是<code>x7</code>、<code>x9</code>、<code>x14</code>、<code>x15</code>的正确的处理方式。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"reflect"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	checkCanAddr()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> S <span class="keyword">struct</span> &#123;</span><br><span class="line">	X <span class="keyword">int</span></span><br><span class="line">	Y <span class="keyword">string</span></span><br><span class="line">	z <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">M</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x0 = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkCanAddr</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 可寻址的情况</span></span><br><span class="line">	v := reflect.ValueOf(x0)</span><br><span class="line">	fmt.Printf(<span class="string">"x0: %v \tcan be addressable and set: %t, %t\n"</span>, x0, v.CanAddr(), v.CanSet()) <span class="comment">//false,false</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x1 = <span class="number">1</span></span><br><span class="line">	v = reflect.Indirect(reflect.ValueOf(x1))</span><br><span class="line">	fmt.Printf(<span class="string">"x1: %v \tcan be addressable and set: %t, %t\n"</span>, x1, v.CanAddr(), v.CanSet()) <span class="comment">//false,false</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x2 = &amp;x1</span><br><span class="line">	v = reflect.Indirect(reflect.ValueOf(x2))</span><br><span class="line">	fmt.Printf(<span class="string">"x2: %v \tcan be addressable and set: %t, %t\n"</span>, x2, v.CanAddr(), v.CanSet()) <span class="comment">//true,true</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x3 = time.Now()</span><br><span class="line">	v = reflect.Indirect(reflect.ValueOf(x3))</span><br><span class="line">	fmt.Printf(<span class="string">"x3: %v \tcan be addressable and set: %t, %t\n"</span>, x3, v.CanAddr(), v.CanSet()) <span class="comment">//false,false</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x4 = &amp;x3</span><br><span class="line">	v = reflect.Indirect(reflect.ValueOf(x4))</span><br><span class="line">	fmt.Printf(<span class="string">"x4: %v \tcan be addressable and set: %t, %t\n"</span>, x4, v.CanAddr(), v.CanSet()) <span class="comment">// true,true</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x5 = []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	v = reflect.ValueOf(x5)</span><br><span class="line">	fmt.Printf(<span class="string">"x5: %v \tcan be addressable and set: %t, %t\n"</span>, x5, v.CanAddr(), v.CanSet()) <span class="comment">// false,false</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x6 = []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	v = reflect.ValueOf(x6[<span class="number">0</span>])</span><br><span class="line">	fmt.Printf(<span class="string">"x6: %v \tcan be addressable and set: %t, %t\n"</span>, x6[<span class="number">0</span>], v.CanAddr(), v.CanSet()) <span class="comment">//false,false</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x7 = []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	v = reflect.ValueOf(x7).Index(<span class="number">0</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"x7: %v \tcan be addressable and set: %t, %t\n"</span>, x7[<span class="number">0</span>], v.CanAddr(), v.CanSet()) <span class="comment">//true,true</span></span><br><span class="line"></span><br><span class="line">	v = reflect.ValueOf(&amp;x7[<span class="number">1</span>])</span><br><span class="line">	fmt.Printf(<span class="string">"x7.1: %v \tcan be addressable and set: %t, %t\n"</span>, x7[<span class="number">1</span>], v.CanAddr(), v.CanSet()) <span class="comment">//true,true</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x8 = [<span class="number">3</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	v = reflect.ValueOf(x8[<span class="number">0</span>])</span><br><span class="line">	fmt.Printf(<span class="string">"x8: %v \tcan be addressable and set: %t, %t\n"</span>, x8[<span class="number">0</span>], v.CanAddr(), v.CanSet()) <span class="comment">//false,false</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// https://groups.google.com/forum/#!topic/golang-nuts/RF9zsX82MWw</span></span><br><span class="line">	<span class="keyword">var</span> x9 = [<span class="number">3</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	v = reflect.Indirect(reflect.ValueOf(x9).Index(<span class="number">0</span>))</span><br><span class="line">	fmt.Printf(<span class="string">"x9: %v \tcan be addressable and set: %t, %t\n"</span>, x9[<span class="number">0</span>], v.CanAddr(), v.CanSet()) <span class="comment">//false,false</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x10 = [<span class="number">3</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	v = reflect.Indirect(reflect.ValueOf(&amp;x10)).Index(<span class="number">0</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"x9: %v \tcan be addressable and set: %t, %t\n"</span>, x10[<span class="number">0</span>], v.CanAddr(), v.CanSet()) <span class="comment">//true,true</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x11 = S&#123;&#125;</span><br><span class="line">	v = reflect.ValueOf(x11)</span><br><span class="line">	fmt.Printf(<span class="string">"x11: %v \tcan be addressable and set: %t, %t\n"</span>, x11, v.CanAddr(), v.CanSet()) <span class="comment">//false,false</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x12 = S&#123;&#125;</span><br><span class="line">	v = reflect.Indirect(reflect.ValueOf(&amp;x12))</span><br><span class="line">	fmt.Printf(<span class="string">"x12: %v \tcan be addressable and set: %t, %t\n"</span>, x12, v.CanAddr(), v.CanSet()) <span class="comment">//true,true</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x13 = S&#123;&#125;</span><br><span class="line">	v = reflect.ValueOf(x13).FieldByName(<span class="string">"X"</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"x13: %v \tcan be addressable and set: %t, %t\n"</span>, x13, v.CanAddr(), v.CanSet()) <span class="comment">//false,false</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x14 = S&#123;&#125;</span><br><span class="line">	v = reflect.Indirect(reflect.ValueOf(&amp;x14)).FieldByName(<span class="string">"X"</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"x14: %v \tcan be addressable and set: %t, %t\n"</span>, x14, v.CanAddr(), v.CanSet()) <span class="comment">//true,true</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x15 = S&#123;&#125;</span><br><span class="line">	v = reflect.Indirect(reflect.ValueOf(&amp;x15)).FieldByName(<span class="string">"z"</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"x15: %v \tcan be addressable and set: %t, %t\n"</span>, x15, v.CanAddr(), v.CanSet()) <span class="comment">//true,false</span></span><br><span class="line"></span><br><span class="line">	v = reflect.Indirect(reflect.ValueOf(&amp;S&#123;&#125;))</span><br><span class="line">	fmt.Printf(<span class="string">"x15.1: %v \tcan be addressable and set: %t, %t\n"</span>, &amp;S&#123;&#125;, v.CanAddr(), v.CanSet()) <span class="comment">//true,true</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x16 = M</span><br><span class="line">	v = reflect.ValueOf(x16)</span><br><span class="line">	fmt.Printf(<span class="string">"x16: %p \tcan be addressable and set: %t, %t\n"</span>, x16, v.CanAddr(), v.CanSet()) <span class="comment">//false,false</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x17 = M</span><br><span class="line">	v = reflect.Indirect(reflect.ValueOf(&amp;x17))</span><br><span class="line">	fmt.Printf(<span class="string">"x17: %p \tcan be addressable and set: %t, %t\n"</span>, x17, v.CanAddr(), v.CanSet()) <span class="comment">//true,true</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x18 <span class="keyword">interface</span>&#123;&#125; = &amp;x11</span><br><span class="line">	v = reflect.ValueOf(x18)</span><br><span class="line">	fmt.Printf(<span class="string">"x18: %v \tcan be addressable and set: %t, %t\n"</span>, x18, v.CanAddr(), v.CanSet()) <span class="comment">//false,false</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x19 <span class="keyword">interface</span>&#123;&#125; = &amp;x11</span><br><span class="line">	v = reflect.ValueOf(x19).Elem()</span><br><span class="line">	fmt.Printf(<span class="string">"x19: %v \tcan be addressable and set: %t, %t\n"</span>, x19, v.CanAddr(), v.CanSet()) <span class="comment">//true,true</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x20 = [...]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	v = reflect.ValueOf([...]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;)</span><br><span class="line">	fmt.Printf(<span class="string">"x20: %v \tcan be addressable and set: %t, %t\n"</span>, x20, v.CanAddr(), v.CanSet()) <span class="comment">//false,false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="http://www.tapirgames.com/blog/golang-unofficial-faq#unaddressable-values" target="_blank" rel="noopener">http://www.tapirgames.com/blog/golang-unofficial-faq#unaddressable-values</a></li>
-<li><a href="https://blog.golang.org/laws-of-reflection" target="_blank" rel="noopener">https://blog.golang.org/laws-of-reflection</a></li>
-<li><a href="https://stackoverflow.com/questions/25384640/why-golang-reflect-makeslice-returns-un-addressable-value" target="_blank" rel="noopener">https://stackoverflow.com/questions/25384640/why-golang-reflect-makeslice-returns-un-addressable-value</a></li>
-<li><a href="http://grokbase.com/t/gg/golang-nuts/13bwpzedxh/go-nuts-golang-reflect-addressable-is-not-consistency" target="_blank" rel="noopener">http://grokbase.com/t/gg/golang-nuts/13bwpzedxh/go-nuts-golang-reflect-addressable-is-not-consistency</a></li>
-<li><a href="https://github.com/golang/go/issues/11865" target="_blank" rel="noopener">https://github.com/golang/go/issues/11865</a></li>
-<li><a href="https://stackoverflow.com/questions/20224478/dereferencing-a-map-index-in-golang" target="_blank" rel="noopener">https://stackoverflow.com/questions/20224478/dereferencing-a-map-index-in-golang</a></li>
-<li><a href="https://stackoverflow.com/questions/38168329/why-are-map-values-not-addressable" target="_blank" rel="noopener">https://stackoverflow.com/questions/38168329/why-are-map-values-not-addressable</a></li>
-<li><a href="https://stackoverflow.com/questions/40793289/go-struct-literals-why-is-this-one-addressable" target="_blank" rel="noopener">https://stackoverflow.com/questions/40793289/go-struct-literals-why-is-this-one-addressable</a></li>
-<li><a href="https://groups.google.com/forum/#!topic/golang-nuts/FnTCX9R_PbM" target="_blank" rel="noopener">https://groups.google.com/forum/#!topic/golang-nuts/FnTCX9R_PbM</a></li>
-<li><a href="https://stackoverflow.com/questions/24318389/golang-elem-vs-indirect-in-the-reflect-package" target="_blank" rel="noopener">https://stackoverflow.com/questions/24318389/golang-elem-vs-indirect-in-the-reflect-package</a></li>
-</ul>
-<p><a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">https://hexo.io/docs/deployment.html</a>)</p>
 
           
         
@@ -467,7 +376,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/default_avatar.png" alt="John Doe">
+              <img class="site-author-image" itemprop="image" src="/james.png" alt="John Doe">
             
               <p class="site-author-name" itemprop="name">John Doe</p>
               <p class="site-description motion-element" itemprop="description">用技术对抗不平等</p>
