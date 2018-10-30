@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Royn Hua</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://huaguoping.github.io/"/>
+  <updated>2018-10-29T10:10:54.740Z</updated>
+  <id>https://huaguoping.github.io/</id>
+  
+  <author>
+    <name>Royn</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="https://huaguoping.github.io/2018/10/29/test-1/"/>
+    <id>https://huaguoping.github.io/2018/10/29/test-1/</id>
+    <published>2018-10-29T08:16:44.000Z</published>
+    <updated>2018-10-29T10:10:54.740Z</updated>
+    
+    <content type="html"><![CDATA[<p>Test标签和分类！！！</p><a id="more"></a><p>这是隐藏内容</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Test标签和分类！！！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Test2" scheme="https://huaguoping.github.io/categories/Test2/"/>
+    
+    
+      <category term="Test2" scheme="https://huaguoping.github.io/tags/Test2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>test</title>
+    <link href="https://huaguoping.github.io/2018/10/29/test/"/>
+    <id>https://huaguoping.github.io/2018/10/29/test/</id>
+    <published>2018-10-29T08:15:27.000Z</published>
+    <updated>2018-10-29T10:11:14.405Z</updated>
+    
+    <content type="html"><![CDATA[<p>测试一下分类和标签的设置！！！</p><p>这里不隐藏</p><a id="more"></a><p>这是隐藏内容</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;测试一下分类和标签的设置！！！&lt;/p&gt;
+&lt;p&gt;这里不隐藏&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Test" scheme="https://huaguoping.github.io/categories/Test/"/>
+    
+    
+      <category term="Test" scheme="https://huaguoping.github.io/tags/Test/"/>
+    
+  </entry>
+  
+</feed>
