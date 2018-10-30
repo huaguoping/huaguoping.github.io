@@ -1859,7 +1859,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #41f7ff;
+  background: #38ffba;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3039,6 +3039,9 @@ pre .javascript .function {
 }
 .with-love {
   color: #ff71a8;
+}
+img.img-topic {
+  width: 100%;
 }
 @-moz-keyframes heartAnimate {
   0%, 100% {
