@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://huaguoping.github.io/"/>
+  <link href="https://huaguoping.com/"/>
   <updated>2018-10-29T10:10:54.740Z</updated>
-  <id>https://huaguoping.github.io/</id>
+  <id>https://huaguoping.com/</id>
   
   <author>
     <name>Royn</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>test</title>
-    <link href="https://huaguoping.github.io/2018/10/29/test-1/"/>
-    <id>https://huaguoping.github.io/2018/10/29/test-1/</id>
+    <link href="https://huaguoping.com/2018/10/29/test-1/"/>
+    <id>https://huaguoping.com/2018/10/29/test-1/</id>
     <published>2018-10-29T08:16:44.000Z</published>
     <updated>2018-10-29T10:10:54.740Z</updated>
     
@@ -29,17 +29,17 @@
     
     </summary>
     
-      <category term="Test2" scheme="https://huaguoping.github.io/categories/Test2/"/>
+      <category term="Test2" scheme="https://huaguoping.com/categories/Test2/"/>
     
     
-      <category term="Test2" scheme="https://huaguoping.github.io/tags/Test2/"/>
+      <category term="Test2" scheme="https://huaguoping.com/tags/Test2/"/>
     
   </entry>
   
   <entry>
     <title>test</title>
-    <link href="https://huaguoping.github.io/2018/10/29/test/"/>
-    <id>https://huaguoping.github.io/2018/10/29/test/</id>
+    <link href="https://huaguoping.com/2018/10/29/test/"/>
+    <id>https://huaguoping.com/2018/10/29/test/</id>
     <published>2018-10-29T08:15:27.000Z</published>
     <updated>2018-10-29T10:11:14.405Z</updated>
     
@@ -50,10 +50,10 @@
     
     </summary>
     
-      <category term="Test" scheme="https://huaguoping.github.io/categories/Test/"/>
+      <category term="Test" scheme="https://huaguoping.com/categories/Test/"/>
     
     
-      <category term="Test" scheme="https://huaguoping.github.io/tags/Test/"/>
+      <category term="Test" scheme="https://huaguoping.com/tags/Test/"/>
     
   </entry>
   

@@ -11,4 +11,4 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: https://huaguoping.github.io/sitemap.xml
+Sitemap: https://huaguoping.com/sitemap.xml
