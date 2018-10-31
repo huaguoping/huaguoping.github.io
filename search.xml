@@ -1,25 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[test]]></title>
-    <url>%2F2018%2F10%2F29%2Ftest-1%2F</url>
-    <content type="text"><![CDATA[Test标签和分类！！！ 这是隐藏内容]]></content>
+<search> 
+  
+    
+    <entry>
+      <title>test</title>
+      <link href="/2018/10/29/test-1/"/>
+      <url>/2018/10/29/test-1/</url>
+      
+        <content type="html"><![CDATA[<p>Test标签和分类！！！</p><a id="more"></a><p>这是隐藏内容</p>]]></content>
+      
+      
       <categories>
-        <category>Test2</category>
+          
+          <category> Test2 </category>
+          
       </categories>
-      <tags>
-        <tag>Test2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[test]]></title>
-    <url>%2F2018%2F10%2F29%2Ftest%2F</url>
-    <content type="text"><![CDATA[测试一下分类和标签的设置！！！ 这里不隐藏 这是隐藏内容]]></content>
+      
+      
+        <tags>
+            
+            <tag> Test2 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>test</title>
+      <link href="/2018/10/29/test/"/>
+      <url>/2018/10/29/test/</url>
+      
+        <content type="html"><![CDATA[<p>测试一下分类和标签的设置！！！</p><p>这里不隐藏</p><a id="more"></a><p>这是隐藏内容</p>]]></content>
+      
+      
       <categories>
-        <category>Test</category>
+          
+          <category> Test </category>
+          
       </categories>
-      <tags>
-        <tag>Test</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> Test </tag>
+            
+        </tags>
+      
+    </entry>
+    
+  
+  
 </search>
