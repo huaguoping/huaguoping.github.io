@@ -30,7 +30,7 @@
       <link href="/articles/test/"/>
       <url>/articles/test/</url>
       
-        <content type="html"><![CDATA[<p>测试一下分类和标签的设置！！！</p><p>这里不隐藏</p><a id="more"></a><p>这是隐藏内容</p>]]></content>
+        <content type="html"><![CDATA[<p>测试一下分类和标签的设置！！！</p><p>这里不隐藏</p><a id="more"></a><p>这是隐藏内容</p><ul><li>测试修改</li></ul>]]></content>
       
       
       <categories>
