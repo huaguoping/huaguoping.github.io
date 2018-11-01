@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://huaguoping.com/"/>
-  <updated>2018-10-31T06:37:02.195Z</updated>
+  <updated>2018-11-01T06:30:50.558Z</updated>
   <id>https://huaguoping.com/</id>
   
   <author>
@@ -17,43 +17,26 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test</title>
-    <link href="https://huaguoping.com/articles/test-1/"/>
-    <id>https://huaguoping.com/articles/test-1/</id>
-    <published>2018-10-29T08:16:44.000Z</published>
-    <updated>2018-10-31T06:37:02.195Z</updated>
+    <title>Golang中slice的使用技巧</title>
+    <link href="https://huaguoping.com/articles/Golang%E4%B8%ADslice%E7%9A%84%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
+    <id>https://huaguoping.com/articles/Golang中slice的使用技巧/</id>
+    <published>2018-11-01T05:43:34.000Z</published>
+    <updated>2018-11-01T06:30:50.558Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;Test标签和分类！！！&lt;/p&gt;
+      golang中slice数据结构的一些使用技巧总结
     
     </summary>
     
-      <category term="Test2" scheme="https://huaguoping.com/categories/Test2/"/>
+      <category term="golang" scheme="https://huaguoping.com/categories/golang/"/>
     
     
-      <category term="Test2" scheme="https://huaguoping.com/tags/Test2/"/>
+      <category term="golang" scheme="https://huaguoping.com/tags/golang/"/>
     
-  </entry>
-  
-  <entry>
-    <title>test</title>
-    <link href="https://huaguoping.com/articles/test/"/>
-    <id>https://huaguoping.com/articles/test/</id>
-    <published>2018-10-29T08:15:27.000Z</published>
-    <updated>2018-10-31T06:37:24.315Z</updated>
+      <category term="slice" scheme="https://huaguoping.com/tags/slice/"/>
     
-    <summary type="html">
-    
-      &lt;p&gt;测试一下分类和标签的设置！！！&lt;/p&gt;
-&lt;p&gt;这里不隐藏&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Test" scheme="https://huaguoping.com/categories/Test/"/>
-    
-    
-      <category term="Test" scheme="https://huaguoping.com/tags/Test/"/>
+      <category term="tricks" scheme="https://huaguoping.com/tags/tricks/"/>
     
   </entry>
   
