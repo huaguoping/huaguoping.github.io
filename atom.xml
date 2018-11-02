@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://huaguoping.com/"/>
-  <updated>2018-11-01T09:20:59.784Z</updated>
+  <updated>2018-11-02T06:13:16.450Z</updated>
   <id>https://huaguoping.com/</id>
   
   <author>
@@ -21,11 +21,11 @@
     <link href="https://huaguoping.com/articles/Golang%E4%B8%ADslice%E7%9A%84%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
     <id>https://huaguoping.com/articles/Golang中slice的使用技巧/</id>
     <published>2018-11-01T05:43:34.000Z</published>
-    <updated>2018-11-01T09:20:59.784Z</updated>
+    <updated>2018-11-02T06:13:16.450Z</updated>
     
     <summary type="html">
     
-      golang中slice数据结构的一些使用技巧总结
+      Golang中slice数据结构的一些使用技巧
     
     </summary>
     
