@@ -1985,7 +1985,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #9a5c0d;
+  background: #67e5ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3108,6 +3108,9 @@ hr {
   border: none;
   background-color: #ddd;
   background-image: repeating-linear-gradient(-45deg, #fff, #fff 4px, transparent 4px, transparent 8px);
+}
+.page-post-detail .post-meta {
+  margin-bottom: 20px;
 }
 @-moz-keyframes heartAnimate {
   0%, 100% {
