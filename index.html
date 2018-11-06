@@ -477,9 +477,9 @@
         
 
         
-          <h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p>网上已经有很多关于slices内部实现的文章。但是每次一说到map，我们好像就一脸懵哔了。我想知道为什么，然后我就去翻看了map的<a href="https://golang.org/src/runtime/hashmap.go" target="_blank" rel="noopener">源码</a>，最终一切都真相大白了。orz….</p>
+          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>网上已经有很多关于slices内部实现的文章。但是每次一说到map，我们好像就一脸懵哔了。我想知道为什么，然后我就去翻看了map的<a href="https://golang.org/src/runtime/hashmap.go" target="_blank" rel="noopener">源码</a>，最终一切都真相大白了。orz….</p>
 <p>至少对我来说，这些源码是有点复杂的。话虽如此，我认为我们还是可以从一个宏观的视角来看看map到底是如何构建和扩容的。并且这至少要能够解释map为什么是无序的、高效的、快速的。</p>
-<h2 id="2-创建和使用map"><a href="#2-创建和使用map" class="headerlink" title="2. 创建和使用map"></a>2. 创建和使用map</h2><p>首先让我们来看看，如何创建一个map并在其中存储一些值：</p>
+<h2 id="创建和使用map"><a href="#创建和使用map" class="headerlink" title="创建和使用map"></a>创建和使用map</h2><p>首先让我们来看看，如何创建一个map并在其中存储一些值：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create an empty map with a key and value of type string</span></span><br><span class="line">colors := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Add a few keys/value pairs to the map</span></span><br><span class="line">colors[<span class="string">"AliceBlue"</span>] = <span class="string">"#F0F8FF"</span></span><br><span class="line">colors[<span class="string">"Coral"</span>]     = <span class="string">"#FF7F50"</span></span><br><span class="line">colors[<span class="string">"DarkGray"</span>]  = <span class="string">"#A9A9A9"</span></span><br></pre></td></tr></table></figure>
 
           <!--noindex-->
@@ -644,7 +644,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  915
+                  897
                 </span>
               
 
@@ -690,7 +690,7 @@
         
           <p>由于引入了内建的<code>append</code>方法，<code>container/vector</code>包的很多方法在Go 1中被移除了，因为我们认为可以通过使用<code>append</code>和<code>copy</code>来代替它们。</p>
 <p>下面就是<code>container/vector</code>包中的方法，我们通过slice来模拟实现。</p>
-<h2 id="常规操作"><a href="#常规操作" class="headerlink" title="常规操作"></a>常规操作</h2><h4 id="1-Append-Vector"><a href="#1-Append-Vector" class="headerlink" title="1. Append Vector"></a>1. Append Vector</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">append</span>(a, b...)</span><br></pre></td></tr></table></figure>
+<h2 id="常规操作"><a href="#常规操作" class="headerlink" title="常规操作"></a>常规操作</h2><h4 id="Append-Vector"><a href="#Append-Vector" class="headerlink" title="Append Vector"></a>Append Vector</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">append</span>(a, b...)</span><br></pre></td></tr></table></figure>
 
           <!--noindex-->
           <div class="post-button text-center">

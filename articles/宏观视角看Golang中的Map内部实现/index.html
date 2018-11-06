@@ -94,7 +94,7 @@
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwx462kvsmj30hs0bltai.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwx4ri8wllj30hs05ot9j.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwx5rxz69ij30hs06zq3v.jpg">
-<meta property="og:updated_time" content="2018-11-05T07:24:40.077Z">
+<meta property="og:updated_time" content="2018-11-06T03:47:56.170Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="宏观视角看Golang中Map的内部实现">
 <meta name="twitter:description" content="从一个宏观的视角来看看Golang的中Map内部是如何实现的">
@@ -473,9 +473,9 @@
       
 
       
-        <h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p>网上已经有很多关于slices内部实现的文章。但是每次一说到map，我们好像就一脸懵哔了。我想知道为什么，然后我就去翻看了map的<a href="https://golang.org/src/runtime/hashmap.go" target="_blank" rel="noopener">源码</a>，最终一切都真相大白了。orz….</p>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>网上已经有很多关于slices内部实现的文章。但是每次一说到map，我们好像就一脸懵哔了。我想知道为什么，然后我就去翻看了map的<a href="https://golang.org/src/runtime/hashmap.go" target="_blank" rel="noopener">源码</a>，最终一切都真相大白了。orz….</p>
 <p>至少对我来说，这些源码是有点复杂的。话虽如此，我认为我们还是可以从一个宏观的视角来看看map到底是如何构建和扩容的。并且这至少要能够解释map为什么是无序的、高效的、快速的。</p>
-<h2 id="2-创建和使用map"><a href="#2-创建和使用map" class="headerlink" title="2. 创建和使用map"></a>2. 创建和使用map</h2><p>首先让我们来看看，如何创建一个map并在其中存储一些值：</p>
+<h2 id="创建和使用map"><a href="#创建和使用map" class="headerlink" title="创建和使用map"></a>创建和使用map</h2><p>首先让我们来看看，如何创建一个map并在其中存储一些值：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create an empty map with a key and value of type string</span></span><br><span class="line">colors := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Add a few keys/value pairs to the map</span></span><br><span class="line">colors[<span class="string">"AliceBlue"</span>] = <span class="string">"#F0F8FF"</span></span><br><span class="line">colors[<span class="string">"Coral"</span>]     = <span class="string">"#FF7F50"</span></span><br><span class="line">colors[<span class="string">"DarkGray"</span>]  = <span class="string">"#A9A9A9"</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>当我们想向map添加一些值时，我们总是会给每个值指定一个key。每个key是为了让我们后续可以在不遍历整个集合的前提下快速的查到对应的值。</p>
@@ -483,18 +483,18 @@
 <p>如果我们遍历整个map，我们取到的值的顺序不一定会和我们当初存进去的顺序一致。事实上，每次执行以下代码，所得到的顺序都会不一样：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">colors := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;&#125;</span><br><span class="line">colors[<span class="string">"AliceBlue"</span>]   = <span class="string">"#F0F8FF"</span></span><br><span class="line">colors[<span class="string">"Coral"</span>]       = <span class="string">"#FF7F50"</span></span><br><span class="line">colors[<span class="string">"DarkGray"</span>]    = <span class="string">"#A9A9A9"</span></span><br><span class="line">colors[<span class="string">"ForestGreen"</span>] = <span class="string">"#228B22"</span></span><br><span class="line">colors[<span class="string">"Indigo"</span>]      = <span class="string">"#4B0082"</span></span><br><span class="line">colors[<span class="string">"Lime"</span>]        = <span class="string">"#00FF00"</span></span><br><span class="line">colors[<span class="string">"Navy"</span>]        = <span class="string">"#000080"</span></span><br><span class="line">colors[<span class="string">"Orchid"</span>]      = <span class="string">"#DA70D6"</span></span><br><span class="line">colors[<span class="string">"Salmon"</span>]      = <span class="string">"#FA8072"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key, value := <span class="keyword">range</span> colors &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"%s:%s, "</span>, key, value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Output:</span></span><br><span class="line"><span class="comment">//AliceBlue:#F0F8FF, DarkGray:#A9A9A9, Indigo:#4B0082, Coral:#FF7F50,</span></span><br><span class="line"><span class="comment">//ForestGreen:#228B22, Lime:#00FF00, Navy:#000080, Orchid:#DA70D6,</span></span><br><span class="line"><span class="comment">//Salmon:#FA8072</span></span><br></pre></td></tr></table></figure>
 <p>现在，我们已经学会如何创建一个map，并对其进行设置和遍历了。接下来，让我们揭开这一切的面纱。：）</p>
-<h2 id="3-map的内部结构"><a href="#3-map的内部结构" class="headerlink" title="3. map的内部结构"></a>3. map的内部结构</h2><p>Go中的map是通过hash table实现的。如果你还不知道hash table是什么，网上已经有很多相关的文章了。或许你可以从<a href="http://en.wikipedia.org/wiki/Hash_table" target="_blank" rel="noopener">Wiki</a>开始。</p>
+<h2 id="map的内部结构"><a href="#map的内部结构" class="headerlink" title="map的内部结构"></a>map的内部结构</h2><p>Go中的map是通过hash table实现的。如果你还不知道hash table是什么，网上已经有很多相关的文章了。或许你可以从<a href="http://en.wikipedia.org/wiki/Hash_table" target="_blank" rel="noopener">Wiki</a>开始。</p>
 <p>Go map的hash table是一个桶数组。桶的数量总是设置成2的乘方。当你执行一个map操作的时候，比如（<strong>colors[“Black”] = “#000000”</strong>）,一个指向相应值的hash key就会生成。在这个例子中，字符串”Black”就是用来生成hash key的。所生成的hash key的低位字节用来定位到哪一个桶。</p>
 <p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwx0a6ws8xj30hs03gmxl.jpg" alt=""></p>
 <p>桶定位好了之后，就可以存储、移除、查找键值对了。如果我们进一步看看桶的内部实现，就会发现它是由两部分组成的。其一，在这个hash key中有一个位数组，它的高八位用来定位到桶。这个数组保证了存储在各自桶中的键值对不会重复。其二，有一个字节数组，其中存储了所有的键值对。这个数组讲所有的键，所有的值分别打包存放在各自的桶中。</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwx462kvsmj30hs0bltai.jpg" alt=""></p>
 <p>当我们遍历一个map的时候，迭代器依次访问所有的桶，然后按照它们在字节数组中的顺序依次返回键值对。这就是为什么map的输出是无序集合。hash keys决定了map的遍历顺序，因为它们决定了每个键值对最终会进入哪个桶。</p>
-<h2 id="4-内存和桶溢出"><a href="#4-内存和桶溢出" class="headerlink" title="4. 内存和桶溢出"></a>4. 内存和桶溢出</h2><p>键值对之所以要这样打包存放在一个字节数组中，有一个很重要的原因。那就是，假如所有的键、值都按照key/value/key/value的方式存储，在每个键值对之间就需要去额外填充适当的空间，才能够保持内存边界对齐。举个🌰，我们申明如下这样的一个map：</p>
+<h2 id="内存和桶溢出"><a href="#内存和桶溢出" class="headerlink" title="内存和桶溢出"></a>内存和桶溢出</h2><p>键值对之所以要这样打包存放在一个字节数组中，有一个很重要的原因。那就是，假如所有的键、值都按照key/value/key/value的方式存储，在每个键值对之间就需要去额外填充适当的空间，才能够保持内存边界对齐。举个🌰，我们申明如下这样的一个map：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">map</span>[<span class="keyword">int64</span>]<span class="keyword">int8</span></span><br></pre></td></tr></table></figure>
 <p>这个map的每一个键值对中，一个字节大小的值都会导致7个字节的额外填充。而通过将键值对以key/key/value/value的方式存储，唯一可能需要额外填充的地方就是在字节数组的最后，而不是之间。消除这些不必要的填充字节，帮助桶和map省了很多的内存开销。想要学习更多边界对齐相关的知识，可以读读<a href="http://www.goinggo.net/2013/07/understanding-type-in-go.html" target="_blank" rel="noopener">这篇文章</a>。</p>
 <p>每个桶配置成了只能存储8个键值对。如果有第九个键值对需要加入到这个已经满了的桶中时，一个新的桶就会被创建，并被各自的桶所引用。</p>
 <p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwx4ri8wllj30hs05ot9j.jpg" alt=""></p>
-<h2 id="5-map扩容"><a href="#5-map扩容" class="headerlink" title="5. map扩容"></a>5. map扩容</h2><p>当我们持续的对一个map添加/删除键值对时，map的性能会开始下降。决定了一个map何时触发扩容的负载阈值是由以下四个因子决定的：</p>
+<h2 id="map扩容"><a href="#map扩容" class="headerlink" title="map扩容"></a>map扩容</h2><p>当我们持续的对一个map添加/删除键值对时，map的性能会开始下降。决定了一个map何时触发扩容的负载阈值是由以下四个因子决定的：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">overflow    : Percentage of buckets which have an overflow bucket</span><br><span class="line">bytes/entry : Number of overhead bytes used per key/value pair</span><br><span class="line">hitprobe    : Number of entries that need to be checked when looking up a key</span><br><span class="line">missprobe   : Number of entries that need to be checked when looking up an absent key</span><br></pre></td></tr></table></figure>
 <p>目前，源码中用的具体的负载阈值如下：</p>
 <table>
@@ -521,7 +521,7 @@
 <p>一旦新的桶数组的内存可用了，旧的桶数组中的所有键值对就可以搬到新的桶数组中去了。每次搬迁发生在map新增/移除键值对的时候。在旧桶数组中的同一个桶的键值对可能被搬运到新桶数组的不同的桶中去。搬运算法试图让键值对均匀的分布在新的桶数组中。</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwx5rxz69ij30hs06zq3v.jpg" alt=""></p>
 <p>这是一个非常精巧的设计，因为迭代器仍然需要去遍历旧的桶，直到旧的桶全部搬运完毕。在迭代操作的过程中，键值对的返回方式也受到了这一设计的影响。采用了很多方案来确保在map扩容的过程中迭代器能正常工作。</p>
-<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><p>正如开头所说的，这篇文章只是在一个宏观的视角下看map的内部结构和它是如何扩容的。源码是用c写的，使用了很多的内存和指针操作来保证效率和可靠。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>正如开头所说的，这篇文章只是在一个宏观的视角下看map的内部结构和它是如何扩容的。源码是用c写的，使用了很多的内存和指针操作来保证效率和可靠。</p>
 <p>当然了，现在的实现方式在未来的任何一个时间都可能会发生改变。但是这并不影响我们正确使用map的能力。这个视角让我们明白了，当我们提前知道会有多少key需要存储时，最好在初始化的时候就把相应大小的内存分配好。同时也解释了为什么map是一个无序的集合，和为什么在遍历map的时候，迭代器的行为看起来像是随机的。</p>
 <blockquote>
 <p>此文为译文，<a href="https://www.ardanlabs.com/blog/2013/12/macro-view-of-map-internals-in-go.html" target="_blank" rel="noopener">原文地址</a>。</p>
@@ -813,7 +813,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-介绍"><span class="nav-number">1.</span> <span class="nav-text">1. 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-创建和使用map"><span class="nav-number">2.</span> <span class="nav-text">2. 创建和使用map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-map的内部结构"><span class="nav-number">3.</span> <span class="nav-text">3. map的内部结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-内存和桶溢出"><span class="nav-number">4.</span> <span class="nav-text">4. 内存和桶溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-map扩容"><span class="nav-number">5.</span> <span class="nav-text">5. map扩容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-总结"><span class="nav-number">6.</span> <span class="nav-text">6. 总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建和使用map"><span class="nav-number">2.</span> <span class="nav-text">创建和使用map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map的内部结构"><span class="nav-number">3.</span> <span class="nav-text">map的内部结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存和桶溢出"><span class="nav-number">4.</span> <span class="nav-text">内存和桶溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map扩容"><span class="nav-number">5.</span> <span class="nav-text">map扩容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
