@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://huaguoping.com/"/>
-  <updated>2019-05-15T02:03:04.574Z</updated>
+  <updated>2019-11-20T07:23:24.841Z</updated>
   <id>https://huaguoping.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>聊聊HTTP1.x和HTTP2.0</title>
+    <link href="https://huaguoping.com/articles/%E8%81%8A%E8%81%8AHTTP1-x%E5%92%8CHTTP2-0/"/>
+    <id>https://huaguoping.com/articles/聊聊HTTP1-x和HTTP2-0/</id>
+    <published>2019-11-20T07:10:39.000Z</published>
+    <updated>2019-11-20T07:23:24.841Z</updated>
+    
+    <summary type="html">
+    
+      HTTP1.x与HTTP2.0的异同
+    
+    </summary>
+    
+      <category term="network" scheme="https://huaguoping.com/categories/network/"/>
+    
+    
+      <category term="http" scheme="https://huaguoping.com/tags/http/"/>
+    
+  </entry>
   
   <entry>
     <title>宏观视角看Golang中Map的内部实现</title>

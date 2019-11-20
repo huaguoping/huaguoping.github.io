@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Blog">
+  <meta name="keywords" content="network, HTTP1.x, HTTP2.0, HTTP">
 
 
 
@@ -82,17 +82,33 @@
 
 
 
-<meta name="description" content="用技术对抗不平等">
-<meta name="keywords" content="go, golang">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Royn Hua">
-<meta property="og:url" content="https://huaguoping.com/index.html">
+<meta name="description" content="HTTP1.x与HTTP2.0的异同">
+<meta name="keywords" content="network, HTTP1.x, HTTP2.0, HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊聊HTTP1.x和HTTP2.0">
+<meta property="og:url" content="https://huaguoping.com/articles/聊聊HTTP1-x和HTTP2-0/index.html">
 <meta property="og:site_name" content="Royn Hua">
-<meta property="og:description" content="用技术对抗不平等">
+<meta property="og:description" content="HTTP1.x与HTTP2.0的异同">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-070932.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-071912.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-074432.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-071934.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-072056.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-073038.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-073049.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-072953.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-075432.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-073312.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-073326.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-074921.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-074932.jpg">
+<meta property="og:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-074942.jpg">
+<meta property="og:updated_time" content="2019-11-20T07:23:24.841Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Royn Hua">
-<meta name="twitter:description" content="用技术对抗不平等">
+<meta name="twitter:title" content="聊聊HTTP1.x和HTTP2.0">
+<meta name="twitter:description" content="HTTP1.x与HTTP2.0的异同">
+<meta name="twitter:image" content="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-070932.jpg">
 
 
 
@@ -122,7 +138,7 @@
 
 
 
-  <link rel="canonical" href="https://huaguoping.com/">
+  <link rel="canonical" href="https://huaguoping.com/articles/聊聊HTTP1-x和HTTP2-0/">
 
 
 
@@ -138,7 +154,7 @@
   </script>
 
 
-  <title>Blog | Royn Hua | 用技术对抗不平等</title>
+  <title>聊聊HTTP1.x和HTTP2.0 | Royn Hua</title>
   
 
 
@@ -166,8 +182,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -312,9 +327,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -344,9 +359,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/articles/聊聊HTTP1-x和HTTP2-0/" itemprop="url">聊聊HTTP1.x和HTTP2.0</a></h2>
+          <h2 class="post-title" itemprop="name headline">聊聊HTTP1.x和HTTP2.0</h2>
         
 
         <div class="post-meta">
@@ -470,236 +483,168 @@
       
 
       
-        
-        <div class="out-img-topic">
-          <img src="https://developers.google.com/web/fundamentals/performance/http2/images/multiplexing01.svg" class="img-topic">
-        </div>
-        
-
-        
-          <h2 id="一、HTTP-1-x"><a href="#一、HTTP-1-x" class="headerlink" title="一、HTTP 1.x"></a>一、HTTP 1.x</h2><p>HTTP协议（HyperTextTransferProtocol，超文本传输协议）是用于从WWW服务器传输超文本到本地浏览器的传输协议。</p>
+        <h2 id="一、HTTP-1-x"><a href="#一、HTTP-1-x" class="headerlink" title="一、HTTP 1.x"></a>一、HTTP 1.x</h2><p>HTTP协议（HyperTextTransferProtocol，超文本传输协议）是用于从WWW服务器传输超文本到本地浏览器的传输协议。</p>
 <h4 id="1-HTTP发展史："><a href="#1-HTTP发展史：" class="headerlink" title="1. HTTP发展史："></a>1. HTTP发展史：</h4><p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-070932.jpg" alt=""></p>
-<h4 id="2-HTTP的基本优化"><a href="#2-HTTP的基本优化" class="headerlink" title="2. HTTP的基本优化"></a>2. HTTP的基本优化</h4><p>影响一个 HTTP 网络请求的因素主要有两个：<strong>带宽</strong>和<strong>延迟</strong>。
+<h4 id="2-HTTP的基本优化"><a href="#2-HTTP的基本优化" class="headerlink" title="2. HTTP的基本优化"></a>2. HTTP的基本优化</h4><p>影响一个 HTTP 网络请求的因素主要有两个：<strong>带宽</strong>和<strong>延迟</strong>。<a id="more"></a></p>
+<ol>
+<li><p><strong>带宽</strong>：如果说我们还停留在拨号上网的阶段，带宽可能会成为一个比较严重影响请求的问题，但是现在网络基础建设已经使得带宽得到极大的提升，我们不再会担心由带宽而影响网速，那么就只剩下延迟了。</p>
+</li>
+<li><p><strong>延迟</strong>：</p>
+<ul>
+<li><strong>浏览器阻塞</strong>（HOL blocking）：浏览器会因为一些原因阻塞请求。浏览器对于同一个域名，同时只能有 4 个连接（这个根据浏览器内核不同可能会有所差异），超过浏览器最大连接数限制，后续请求就会被阻塞。</li>
+<li><strong>DNS 查询</strong>（DNS Lookup）：浏览器需要知道目标服务器的 IP 才能建立连接。将域名解析为 IP 的这个系统就是 DNS。这个通常可以利用DNS缓存结果来达到减少这个时间的目的。**</li>
+<li><strong>建立连接</strong>（Initial connection）：HTTP 是基于 TCP 协议的，浏览器最快也要在第三次握手时才能捎带 HTTP 请求报文，达到真正的建立连接，但是这些连接无法复用会导致每次请求都经历三次握手和慢启动。三次握手在高延迟的场景下影响较明显，慢启动则对文件类大请求影响较大。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>HTTP 性能优化的关键并不在于高带宽，而是<strong>低延迟</strong></p>
+</blockquote>
+<h4 id="3-HTTP1-0和HTTP1-1的一些区别"><a href="#3-HTTP1-0和HTTP1-1的一些区别" class="headerlink" title="3. HTTP1.0和HTTP1.1的一些区别"></a>3. HTTP1.0和HTTP1.1的一些区别</h4><p>HTTP1.0最早在网页中使用是在1996年，那个时候只是使用一些较为简单的网页上和网络请求上，而HTTP1.1则在1999年才开始广泛应用于现在的各大浏览器网络请求中，同时HTTP1.1也是当前使用最为广泛的HTTP协议。 主要区别主要体现在：</p>
+<ul>
+<li><p><strong>缓存处理</strong></p>
+<p>  在HTTP1.0中主要使用header里的<code>If-Modified-Since</code>，<code>Expires</code>来做为缓存判断的标准，HTTP1.1则引入了更多的缓存控制策略例如<code>Entity tag</code>，<code>If-Unmodified-Since</code>， <code>If-Match</code>， <code>If-None-Match</code>等更多可供选择的缓存头来控制缓存策略。</p>
+<blockquote>
+<p>提供了更多可供选择的缓存头来控制缓存策略</p>
+</blockquote>
+</li>
+<li><p><strong>带宽优化及网络连接的使用</strong></p>
+<p>  HTTP1.0中，存在一些浪费带宽的现象，例如客户端只是需要某个对象的一部分，而服务器却将整个对象送过来了，并且不支持断点续传功能，HTTP1.1则在请求头引入了range头域，它允许只请求资源的某个部分，即返回码是206（Partial Content），这样就方便了开发者自由的选择以便于充分利用带宽和连接。</p>
+<blockquote>
+<p>支持断点续传</p>
+</blockquote>
+</li>
+<li><p><strong>错误通知的管理</strong></p>
+<p>  在HTTP1.1中新增了24个错误状态响应码，如409（Conflict）表示请求的资源与资源的当前状态发生冲突；410（Gone）表示服务器上的某个资源被永久性的删除。</p>
+<blockquote>
+<p>提供了更多的错误状态响应码</p>
+</blockquote>
+</li>
+<li><p><strong>Host头处理</strong></p>
+<p>  在HTTP1.0中认为每台服务器都绑定一个唯一的IP地址，因此，请求消息中的URL并没有传递主机名（hostname）。但随着虚拟主机技术的发展，在一台物理服务器上可以存在多个虚拟主机（Multi-homed Web Servers），并且它们共享一个IP地址。HTTP1.1的请求消息和响应消息都应支持Host头域，且请求消息中如果没有Host头域会报告一个错误（400 Bad Request）。</p>
+<blockquote>
+<p>host域</p>
+</blockquote>
+</li>
+<li><p><strong>长连接</strong></p>
+<p>  HTTP 1.1支持长连接（PersistentConnection）和请求的流水线（Pipelining）处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟，在HTTP1.1中默认开启Connection： keep-alive，一定程度上弥补了HTTP1.0每次请求都要创建连接的缺点。</p>
+<blockquote>
+<p>支持长连接和pipelining</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="4-HTTPS与HTTP的一些区别"><a href="#4-HTTPS与HTTP的一些区别" class="headerlink" title="4. HTTPS与HTTP的一些区别"></a>4. HTTPS与HTTP的一些区别</h4><ul>
+<li>HTTPS协议需要到CA申请证书，一般免费证书很少，需要交费。</li>
+<li>HTTP协议运行在TCP之上，所有传输的内容都是明文，HTTPS运行在SSL/TLS之上，SSL/TLS运行在TCP之上，所有传输的内容都经过加密的。</li>
+<li>HTTP和HTTPS使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</li>
+<li>HTTPS可以有效的防止运营商劫持，解决了防劫持的一个大问题。</li>
+</ul>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-071912.jpg" alt=""></p>
+<h2 id="二、SPDY：Google提出的HTTP1-x优化方案"><a href="#二、SPDY：Google提出的HTTP1-x优化方案" class="headerlink" title="二、SPDY：Google提出的HTTP1.x优化方案"></a>二、SPDY：Google提出的HTTP1.x优化方案</h2><p>2012年google如一声惊雷提出了SPDY的方案，优化了HTTP1.X的请求延迟，解决了HTTP1.X的安全性，具体如下：</p>
+<ol>
+<li><p><strong>降低延迟</strong></p>
+<p> 针对HTTP高延迟的问题，SPDY优雅的采取了多路复用（multiplexing）。多路复用通过多个请求stream共享一个tcp连接的方式，解决了HOL blocking的问题，降低了延迟同时提高了带宽的利用率。</p>
+</li>
+<li><p><strong>请求优先级</strong>（request prioritization）</p>
+<p> 多路复用带来一个新的问题是，在连接共享的基础之上有可能会导致关键请求被阻塞。SPDY允许给每个request设置优先级，这样重要的请求就会优先得到响应。比如浏览器加载首页，首页的html内容应该优先展示，之后才是各种静态资源文件，脚本文件等加载，这样可以保证用户能第一时间看到网页内容。</p>
+</li>
+<li><p><strong>header压缩。</strong></p>
+<p> 前面提到HTTP1.x的header很多时候都是重复多余的。选择合适的压缩算法可以减小包的大小和数量。</p>
+</li>
+<li><p><strong>基于HTTPS的加密协议传输</strong></p>
+<p> 大大提高了传输数据的可靠性。</p>
+</li>
+<li><p><strong>服务端推送</strong>（server push）</p>
+<p> 采用了SPDY的网页，例如我的网页有一个sytle.css的请求，在客户端收到sytle.css数据的同时，服务端会将sytle.js的文件推送给客户端，当客户端再次尝试获取sytle.js时就可以直接从缓存中获取到，不用再发请求了。SPDY构成图：</p>
+</li>
+</ol>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-074432.jpg" alt=""></p>
+<p>SPDY位于HTTP之下，TCP和SSL之上，这样可以轻松兼容老版本的HTTP协议(将HTTP1.x的内容封装成一种新的frame格式)，同时可以使用已有的SSL功能。</p>
+<h2 id="三、HTTP-2-0横空出世"><a href="#三、HTTP-2-0横空出世" class="headerlink" title="三、HTTP 2.0横空出世"></a>三、HTTP 2.0横空出世</h2><h4 id="1-性能惊人"><a href="#1-性能惊人" class="headerlink" title="1. 性能惊人"></a>1. 性能惊人</h4><p>HTTP 2.0 的出现，相比于 HTTP 1.x ，大幅度的提升了 web 性能。</p>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-071934.jpg" alt=""></p>
+<p>这是 Akamai 公司建立的一个官方的演示，用以说明 HTTP/2 相比于之前的 HTTP/1.1 在性能上的大幅度提升。 同时请求 379 张图片，从Load time 的对比可以看出 HTTP/2 在速度上的优势。</p>
+<h4 id="2-HTTP2-0：SPDY的升级版"><a href="#2-HTTP2-0：SPDY的升级版" class="headerlink" title="2. HTTP2.0：SPDY的升级版"></a>2. HTTP2.0：SPDY的升级版</h4><p>HTTP2.0可以说是SPDY的升级版（其实原本也是基于SPDY设计的），但是，HTTP2.0 跟 SPDY 仍有不同的地方，如下：</p>
+<ol>
+<li>HTTP2.0 支持明文 HTTP 传输，而 SPDY 强制使用 HTTPS。</li>
+<li>HTTP2.0 消息头的压缩算法采用 <strong>HPACK</strong>，而非 SPDY 采用的 <strong>DEFLATE</strong>。</li>
+</ol>
+<h2 id="四、HTTP-2-0-和-HTTP1-1-区别"><a href="#四、HTTP-2-0-和-HTTP1-1-区别" class="headerlink" title="四、HTTP 2.0 和 HTTP1.1 区别"></a>四、HTTP 2.0 和 HTTP1.1 区别</h2><p>后面我们将通过几个方面来说说HTTP 2.0 和 HTTP1.1 区别，并且和你解释下其中的原理。</p>
+<h4 id="区别一：多路复用"><a href="#区别一：多路复用" class="headerlink" title="区别一：多路复用"></a>区别一：多路复用</h4><blockquote>
+<p>TCP 连接会随着时间进行自我「调谐」，起初会限制连接的最大速度，如果数据成功传输，会随着时间的推移提高传输的速度。这种调谐则被称为 <strong>TCP 慢启动</strong>。由于这种原因，让原本就具有突发性和短时性的 HTTP 连接变的十分低效。</p>
+<p>HTTP/2 通过让所有数据流共用同一个连接，可以更有效地使用 TCP 连接，让高带宽也能真正的服务于 HTTP 的性能提升。</p>
+</blockquote>
+<p>多路复用允许单一的 HTTP/2 连接同时发起多重的请求-响应消息。看个例子：</p>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-072056.jpg" alt=""></p>
+<p>整个访问流程第一次请求index.html页面，之后浏览器会去请求style.css和scripts.js的文件。左边的图是<strong>顺序</strong>加载两个个文件的，右边则是<strong>并行</strong>加载两个文件。</p>
+<p>通过下面两张图，我们可以更加深入的认识多路复用：</p>
+<p>HTTP 1.x：</p>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-073038.jpg" alt=""></p>
+<p>HTTP 2：</p>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-073049.jpg" alt=""></p>
+<p>总结下：</p>
+<p>多路复用技术：单连接多资源的方式，减少服务端的链接压力，内存占用更少，连接吞吐量更大；由于减少TCP 慢启动时间，提高传输的速度。</p>
+<h4 id="区别二：二进制分帧"><a href="#区别二：二进制分帧" class="headerlink" title="区别二：二进制分帧"></a>区别二：二进制分帧</h4><blockquote>
+<p>TCP连接相当于两根管道（一个用于服务器到客户端，一个用于客户端到服务器），管道里面数据传输是通过字节码传输，传输是有序的，每个字节都是一个一个来传输。</p>
+</blockquote>
+<p>我们知道HTTP底层其实依赖的是TCP协议，那问题是在同一个连接里面同时发生两个请求响应着是怎么做到的？</p>
+<p>首先你要知道，TCP连接相当于两根管道（一个用于服务器到客户端，一个用于客户端到服务器），管道里面数据传输是通过字节码传输，传输是有序的，每个字节都是一个一个来传输。</p>
+<p>例如客户端要向服务器发送Hello、World两个单词，只能是先发送Hello再发送World，没办法同时发送这两个单词。不然服务器收到的可能就是HWeolrllod（注意是穿插着发过去了，但是顺序还是不会乱）。这样服务器就懵b了。</p>
+<p>接上面的问题，能否同时发送Hello和World两个单词能，当然也是可以的，可以将数据拆成包，给每个包打上标签。发的时候是这样的①H ②W ①e ②o ①l ②r ①l ②l ①o ②d。这样到了服务器，服务器根据标签把两个单词区分开来。实际的发送效果如下图：</p>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-072953.jpg" alt=""></p>
+<p>要实现上面的效果我们引入一个新的概念就是：二进制分帧。</p>
+<p>二进制分帧层 在 应用层(HTTP/2)和传输层(TCP or UDP)之间。<u>HTTP/2并没有去修改TCP协议而是尽可能的利用TCP的特性</u>。</p>
+<p>在二进制分帧层中， HTTP/2 会将所有传输的信息分割为帧（frame），并对它们采用二进制格式的编码 ，其中 首部信息会被封装到 HEADER frame，而相应的 Request Body 则封装到 DATA frame 里面。</p>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-075432.jpg" alt=""></p>
+<h4 id="区别三：首部压缩"><a href="#区别三：首部压缩" class="headerlink" title="区别三：首部压缩"></a>区别三：首部压缩</h4><p>为什么要压缩？在 HTTP/1 中，HTTP 请求和响应都是由「状态行、请求 / 响应头部、消息主体」三部分组成。一般而言，消息主体都会经过 gzip 压缩，或者本身传输的就是压缩过后的二进制文件（例如图片、音频），但状态行和头部却没有经过任何压缩，直接以纯文本传输。</p>
+<p>随着 Web 功能越来越复杂，每个页面产生的请求数也越来越多，导致消耗在头部的流量越来越多，尤其是每次都要传输 UserAgent、Cookie 这类不会频繁变动的内容，完全是一种浪费。</p>
+<p>我们再用通俗的语言解释下，压缩的原理。头部压缩需要在支持 HTTP/2 的浏览器和服务端之间:</p>
+<ul>
+<li>维护一份相同的静态字典（Static Table），包含常见的头部名称，以及特别常见的头部名称与值的组合；</li>
+<li>维护一份相同的动态字典（Dynamic Table），可以动态的添加内容；</li>
+<li>支持基于静态哈夫曼码表的哈夫曼编码（Huffman Coding）；</li>
+</ul>
+<p>静态字典的作用有两个：</p>
+<ul>
+<li>对于完全匹配的头部键值对，例如 “:method :GET”，可以直接使用一个字符表示；</li>
+<li>对于头部名称可以匹配的键值对，例如 “cookie :xxxxxxx”，可以将名称使用一个字符表示。</li>
+</ul>
+<p>HTTP/2 中的静态字典如下（以下只截取了部分，完整表格在这里）：</p>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-073312.jpg" alt=""></p>
+<p>同时，浏览器和服务端都可以向动态字典中添加键值对，之后这个键值对就可以使用一个字符表示了。需要注意的是，动态字典上下文有关，需要为每个 HTTP/2 连接维护不同的字典。在传输过程中使用，使用字符代替键值对大大减少传输的数据量。</p>
+<h4 id="区别四：HTTP2支持服务器推送"><a href="#区别四：HTTP2支持服务器推送" class="headerlink" title="区别四：HTTP2支持服务器推送"></a>区别四：HTTP2支持服务器推送</h4><blockquote>
+<p>意思是说，当我们对支持HTTP2.0的web server请求数据的时候，服务器会顺便把一些客户端需要的资源一起推送到客户端，免得客户端再次创建连接发送请求到服务器端获取。这种方式非常合适加载静态资源。</p>
+<p>服务器端推送的这些资源其实存在客户端的某处地方，客户端直接从本地加载这些资源就可以了，不用走网络，速度自然是快很多的。</p>
+</blockquote>
+<p>服务端推送是一种在客户端请求之前发送数据的机制。当代网页使用了许多资源：HTML、样式表、脚本、图片等等。在HTTP/1.x中这些资源每一个都必须明确地请求。这可能是一个很慢的过程。浏览器从获取HTML开始，然后在它解析和评估页面的时候，增量地获取更多的资源。因为服务器必须等待浏览器做每一个请求，网络经常是空闲的和未充分使用的。</p>
+<p>为了改善延迟，HTTP/2引入了<strong>server push</strong>，它允许服务端推送资源给浏览器，在浏览器明确地请求之前。一个服务器经常知道一个页面需要很多附加资源，在它响应浏览器第一个请求的时候，可以开始推送这些资源。这允许服务端去完全充分地利用一个可能空闲的网络，改善页面加载时间。</p>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-073326.jpg" alt=""></p>
+<h2 id="五、HTTP2-0特性解析"><a href="#五、HTTP2-0特性解析" class="headerlink" title="五、HTTP2.0特性解析"></a>五、HTTP2.0特性解析</h2><h4 id="1-HTTP2-0的多路复用和HTTP1-X中的长连接复用有什么区别？"><a href="#1-HTTP2-0的多路复用和HTTP1-X中的长连接复用有什么区别？" class="headerlink" title="1. HTTP2.0的多路复用和HTTP1.X中的长连接复用有什么区别？"></a>1. HTTP2.0的多路复用和HTTP1.X中的长连接复用有什么区别？</h4><ul>
+<li>HTTP/1.x：一次请求-响应，建立一个连接，用完关闭；每一个请求都要建立一个连接；</li>
+<li>HTTP/1.1 Pipeling解决方式为，若干个请求排队串行化单线程处理，后面的请求等待前面请求的返回才能获得执行机会，一旦有某请求超时等，后续请求只能被阻塞，毫无办法，也就是人们常说的线头阻塞；</li>
+<li>HTTP/2多个请求可同时在一个连接上并行执行。某个请求任务耗时严重，不会影响到其它连接的正常执行；具体如图：</li>
+</ul>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-074921.jpg" alt=""></p>
+<h4 id="2-服务端推送-server-push-到底是什么？"><a href="#2-服务端推送-server-push-到底是什么？" class="headerlink" title="2. 服务端推送(server push)到底是什么？"></a>2. 服务端推送(server push)到底是什么？</h4><p>服务端推送能把客户端所需要的资源伴随着index.html一起发送到客户端，省去了客户端重复请求的步骤。正因为没有发起请求，建立连接等操作，所以静态资源通过服务端推送的方式可以极大地提升速度。具体如下：</p>
+<ul>
+<li>普通的客户端请求过程：</li>
+</ul>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-074932.jpg" alt=""></p>
+<ul>
+<li>服务端推送的过程：</li>
+</ul>
+<p><img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-11-15-074942.jpg" alt=""></p>
+<p>但是，现阶段用 <strong>server push</strong> 推送静态资源并不是一件有意义的事情，原因在于：</p>
+<ul>
+<li>HTML 文件通常不大，而且样式表一般很靠前，浏览器发现这类静态资源的时间几乎可以忽略不计</li>
+<li>HTTP/2 已经能够复用 TCP 连接了，请求不再像以前那样昂贵，请求的实际数据很小，发送请求的时间也几乎可以忽略不计</li>
+<li>国内的 CDN 普遍不支持 server push，这意味着，如果要推送静态资源，就必须耗费自己服务器的带宽，同时也享受不到 CDN 的各种好处了</li>
+<li>静态资源通常会被缓存很长时间，提前推送的话，在大多数情况下反而会浪费流量</li>
+</ul>
+<p>因此，Server push推送的资源并不是静态资源，而应该是 API。当然，Server push对要推送的资源是有限制的：其请求必须是可缓存的、安全的，而且不能带有请求体。换句话说，Server push可以推 GET 和 HEAD 请求的响应。</p>
+<h4 id="3-为什么需要头部压缩？"><a href="#3-为什么需要头部压缩？" class="headerlink" title="3. 为什么需要头部压缩？"></a>3. 为什么需要头部压缩？</h4><p>假定一个页面有100个资源需要加载（这个数量对于今天的Web而言还是挺保守的）, 而每一次请求都有1kb的消息头（这同样也并不少见，因为Cookie和引用等东西的存在）, 则至少需要多消耗100kb来获取这些消息头。HTTP2.0可以维护一个字典，差量更新HTTP头部，大大降低因头部传输产生的流量。具体参考：HTTP/2 头部压缩技术介绍</p>
+<h4 id="4-HTTP2-0多路复用有多好？"><a href="#4-HTTP2-0多路复用有多好？" class="headerlink" title="4. HTTP2.0多路复用有多好？"></a>4. HTTP2.0多路复用有多好？</h4><p>HTTP 性能优化的关键并不在于高带宽，而是低延迟。TCP 连接会随着时间进行自我「调谐」，起初会限制连接的最大速度，如果数据成功传输，会随着时间的推移提高传输的速度。这种调谐则被称为 TCP 慢启动。由于这种原因，让原本就具有突发性和短时性的 HTTP 连接变的十分低效。HTTP/2 通过让所有数据流共用同一个连接，可以更有效地使用 TCP 连接，让高带宽也能真正的服务于 HTTP 的性能提升。</p>
+<h2 id="六、参考"><a href="#六、参考" class="headerlink" title="六、参考"></a>六、参考</h2><p><a href="https://www.kelede.win/posts/HTTP1.0和HTTP2.0的区别/" target="_blank" rel="noopener">HTTP1.0和HTTP2.0的区别</a></p>
 
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/articles/聊聊HTTP1-x和HTTP2-0/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://huaguoping.com/articles/宏观视角看Golang中的Map内部实现/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Royn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/james.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Royn Hua">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/articles/宏观视角看Golang中的Map内部实现/" itemprop="url">宏观视角看Golang中Map的内部实现</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-05T11:02:13+08:00">
-                2018-11-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/golang/" itemprop="url" rel="index">
-                    <span itemprop="name">golang</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/articles/宏观视角看Golang中的Map内部实现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/articles/宏观视角看Golang中的Map内部实现/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/articles/宏观视角看Golang中的Map内部实现/" class="leancloud_visitors" data-flag-title="宏观视角看Golang中Map的内部实现">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.7k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-        <div class="out-img-topic">
-          <img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-05-15-020227.jpg" class="img-topic">
-        </div>
-        
-
-        
-          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>网上已经有很多关于slices内部实现的文章。但是每次一说到map，我们好像就一脸懵哔了。我想知道为什么，然后我就去翻看了map的<a href="https://golang.org/src/runtime/hashmap.go" target="_blank" rel="noopener">源码</a>，最终一切都真相大白了。orz….</p>
-<p>至少对我来说，这些源码是有点复杂的。话虽如此，我认为我们还是可以从一个宏观的视角来看看map到底是如何构建和扩容的。并且这至少要能够解释map为什么是无序的、高效的、快速的。</p>
-<h2 id="创建和使用map"><a href="#创建和使用map" class="headerlink" title="创建和使用map"></a>创建和使用map</h2><p>首先让我们来看看，如何创建一个map并在其中存储一些值：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create an empty map with a key and value of type string</span></span><br><span class="line">colors := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Add a few keys/value pairs to the map</span></span><br><span class="line">colors[<span class="string">"AliceBlue"</span>] = <span class="string">"#F0F8FF"</span></span><br><span class="line">colors[<span class="string">"Coral"</span>]     = <span class="string">"#FF7F50"</span></span><br><span class="line">colors[<span class="string">"DarkGray"</span>]  = <span class="string">"#A9A9A9"</span></span><br></pre></td></tr></table></figure>
-
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/articles/宏观视角看Golang中的Map内部实现/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
       
     </div>
     
@@ -708,23 +653,115 @@
 
 
     
+    <hr>
+    <div style="text-align:center;color:#73a2c0;font-size:14px;letter-spacing: 10px"><i class="fa fa-heart"></i> The End <i class="fa fa-heart"></i></div>
+    
 
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.JPG" alt="Royn wechat" style="width: 200px; max-width: 100%;">
+    <div>欢迎来撩~</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赞赏一杯咖啡~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechat-reward.JPG" alt="Royn 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay-reward.JPG" alt="Royn 支付宝">
+        <p>支付宝</p>
+      </div>
     
 
     
 
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Royn
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://huaguoping.com/articles/聊聊HTTP1-x和HTTP2-0/" title="聊聊HTTP1.x和HTTP2.0">https://huaguoping.com/articles/聊聊HTTP1-x和HTTP2-0/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/http/" rel="tag"><i class="fa fa-tag"></i> http</a>
+          
+        </div>
       
 
       
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/宏观视角看Golang中的Map内部实现/" rel="next" title="宏观视角看Golang中Map的内部实现">
+                宏观视角看Golang中Map的内部实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -734,220 +771,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://huaguoping.com/articles/Golang中slice的使用技巧/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Royn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/james.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Royn Hua">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/articles/Golang中slice的使用技巧/" itemprop="url">Golang中slice的使用技巧</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T13:43:34+08:00">
-                2018-11-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/golang/" itemprop="url" rel="index">
-                    <span itemprop="name">golang</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/articles/Golang中slice的使用技巧/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/articles/Golang中slice的使用技巧/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/articles/Golang中slice的使用技巧/" class="leancloud_visitors" data-flag-title="Golang中slice的使用技巧">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  897
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-        <div class="out-img-topic">
-          <img src="http://myblogpic.oss-cn-shanghai.aliyuncs.com/2019-05-15-020028.jpg" class="img-topic">
-        </div>
-        
-
-        
-          <p>由于引入了内建的<code>append</code>方法，<code>container/vector</code>包的很多方法在Go 1中被移除了，因为我们认为可以通过使用<code>append</code>和<code>copy</code>来代替它们。</p>
-<p>下面就是<code>container/vector</code>包中的方法，我们通过slice来模拟实现。</p>
-<h2 id="常规操作"><a href="#常规操作" class="headerlink" title="常规操作"></a>常规操作</h2><h4 id="Append-Vector"><a href="#Append-Vector" class="headerlink" title="Append Vector"></a>Append Vector</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">append</span>(a, b...)</span><br></pre></td></tr></table></figure>
-
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/articles/Golang中slice的使用技巧/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -955,6 +783,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -975,8 +810,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -1073,6 +917,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、HTTP-1-x"><span class="nav-number">1.</span> <span class="nav-text">一、HTTP 1.x</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-HTTP发展史："><span class="nav-number">1.0.1.</span> <span class="nav-text">1. HTTP发展史：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-HTTP的基本优化"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. HTTP的基本优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-HTTP1-0和HTTP1-1的一些区别"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. HTTP1.0和HTTP1.1的一些区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-HTTPS与HTTP的一些区别"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. HTTPS与HTTP的一些区别</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#二、SPDY：Google提出的HTTP1-x优化方案"><span class="nav-number">2.</span> <span class="nav-text">二、SPDY：Google提出的HTTP1.x优化方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、HTTP-2-0横空出世"><span class="nav-number">3.</span> <span class="nav-text">三、HTTP 2.0横空出世</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-性能惊人"><span class="nav-number">3.0.1.</span> <span class="nav-text">1. 性能惊人</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-HTTP2-0：SPDY的升级版"><span class="nav-number">3.0.2.</span> <span class="nav-text">2. HTTP2.0：SPDY的升级版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、HTTP-2-0-和-HTTP1-1-区别"><span class="nav-number">4.</span> <span class="nav-text">四、HTTP 2.0 和 HTTP1.1 区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#区别一：多路复用"><span class="nav-number">4.0.1.</span> <span class="nav-text">区别一：多路复用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#区别二：二进制分帧"><span class="nav-number">4.0.2.</span> <span class="nav-text">区别二：二进制分帧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#区别三：首部压缩"><span class="nav-number">4.0.3.</span> <span class="nav-text">区别三：首部压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#区别四：HTTP2支持服务器推送"><span class="nav-number">4.0.4.</span> <span class="nav-text">区别四：HTTP2支持服务器推送</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、HTTP2-0特性解析"><span class="nav-number">5.</span> <span class="nav-text">五、HTTP2.0特性解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-HTTP2-0的多路复用和HTTP1-X中的长连接复用有什么区别？"><span class="nav-number">5.0.1.</span> <span class="nav-text">1. HTTP2.0的多路复用和HTTP1.X中的长连接复用有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-服务端推送-server-push-到底是什么？"><span class="nav-number">5.0.2.</span> <span class="nav-text">2. 服务端推送(server push)到底是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-为什么需要头部压缩？"><span class="nav-number">5.0.3.</span> <span class="nav-text">3. 为什么需要头部压缩？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-HTTP2-0多路复用有多好？"><span class="nav-number">5.0.4.</span> <span class="nav-text">4. HTTP2.0多路复用有多好？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、参考"><span class="nav-number">6.</span> <span class="nav-text">六、参考</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1236,6 +1096,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1737,6 +1601,23 @@
 
   
   
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 14688,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
 
   
 
